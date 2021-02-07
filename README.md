@@ -30,5 +30,5 @@ Flutter qr or barcode scan plugin(This plug-in is [r_scan](https://github.com/rh
 - [✔] 内置精美的扫描框（仿支付宝扫描框，Material Design风格扫描框）,可自行定制
 - [✔] 可定制扫描的三种状态【扫描中、加载中、停止】
 
-| <img src="resource/qr_code1.gif" width="379px;"/><br /><sub><b>扫描二维码</b></sub> | <img src="resource/qr_code1.gif" width="379px;"/><br /><sub><b>扫描条形码</b></sub> | <img src="resource/qr_code1.gif" width="379px;"/><br /><sub><b>Material风格</b></sub> | 
+| <img src="resource/qr_code1.gif" width="379px;"/><br /><sub><b>扫描二维码</b></sub> | <img src="resource/qr_code1.gif" width="379px;"/><br /><sub><b>扫描条形码</b></sub> | <img src="resource/qr_code2.gif" width="379px;"/><br /><sub><b>Material风格</b></sub> | 
 | :---: | :---: | :---: |

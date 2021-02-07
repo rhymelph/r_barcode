@@ -11,7 +11,7 @@ Detecting CXX compiler ABI info - done
 Detecting CXX compile features
 Detecting CXX compile features - done
 Could NOT find JPEG (missing: JPEG_LIBRARY JPEG_INCLUDE_DIR) 
-CMake Warning (dev) at /Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/CMakeLists.txt:45 (if):
+CMake Warning (dev) at /Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/src/main/cpp/libyuv/CMakeLists.txt:45 (if):
   Policy CMP0064 is not set: Support new TEST if() operator.  Run "cmake
   --help-policy CMP0064" for policy details.  Use the cmake_policy command to
   set the policy and suppress this warning.

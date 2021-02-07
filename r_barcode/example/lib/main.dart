@@ -17,7 +17,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage());
   }
 }
 
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         try {
           _controller = RBarcodeCameraController(
               value[0], RBarcodeCameraResolutionPreset.max,
-              formats: [RBarcodeFormat.QRCode])
+              formats: [RBarcodeFormat.QRCode], isDebug: false)
             ..addListener(_handleResultListener)
             ..initialize().then(_handleInitListener);
         } catch (e) {
@@ -237,9 +239,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 //      );
 
   Widget _buildCamera() => Center(
-        child: AlipayFrameWidget(
+        child: MaterialBarCodeFrameWidget(
           scanStatus: _scanStatus,
-//          scanType: _scanType,
+          scanType: _scanType,
           child: AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
             child: GestureDetector(

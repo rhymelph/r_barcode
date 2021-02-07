@@ -315,7 +315,7 @@ class MaterialBarCodeFrame extends CustomPainter {
 
     if (status == BarcodeScanStatus.loading) {
       drawProgressIndicator();
-    } else if (status == BarcodeScanStatus.loading) {
+    } else if (status == BarcodeScanStatus.scan) {
       drawExpandIndicator();
     }
   }

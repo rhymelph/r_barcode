@@ -1,4 +1,4 @@
-# Install script for directory: /Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp
+# Install script for directory: /Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/src/main/cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64/build/cmake_install.cmake")
+  include("/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/x86_64/build/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -169,14 +169,14 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             }
             "requestFocus" -> {
                 if (rBarcodeCameraView != null) {
-                    val windowManager:WindowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-                    val outMetrics:DisplayMetrics = DisplayMetrics()
+                    val windowManager: WindowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                    val outMetrics: DisplayMetrics = DisplayMetrics()
                     windowManager.defaultDisplay.getMetrics(outMetrics)
                     val width = outMetrics.widthPixels
                     val height = outMetrics.heightPixels
                     val meteringWidth = 100
                     val meteringHeight = 100
-                    val rect = MeteringRectangle((width-meteringWidth)/2, (height-meteringHeight)/2, meteringWidth, meteringHeight, 100)
+                    val rect = MeteringRectangle((width - meteringWidth) / 2, (height - meteringHeight) / 2, meteringWidth, meteringHeight, 100)
                     rBarcodeCameraView!!.requestFocus(rect)
                 }
                 result.success(null)
@@ -194,8 +194,9 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
         val cameraName = call.argument<String>("cameraName")
         val resolutionPreset = call.argument<String>("resolutionPreset")
+        val isDebug = call.argument<Boolean>("isDebug") ?: true
         val flutterSurfaceTexture: SurfaceTextureEntry = textureRegistry!!.createSurfaceTexture()
-        rBarcodeEngine!!.initEventChannel(messenger!!, flutterSurfaceTexture.id())
+        rBarcodeEngine!!.initEventChannel(messenger!!, flutterSurfaceTexture.id(), isDebug)
         rBarcodeCameraView = RBarcodeCameraView(activity, flutterSurfaceTexture, cameraName!!, resolutionPreset!!, rBarcodeEngine!!.imageListener)
         rBarcodeCameraView!!.open(result)
     }

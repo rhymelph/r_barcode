@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
-    "cmakeServerLogFile": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a/cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cxx/debug/arm64-v8a",
+    "cmakeArtifactsBaseFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
+    "cmakeServerLogFile": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a/cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cxx/debug/arm64-v8a",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,7 +15,7 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
+      "buildRoot": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
       "cmakeToolchain": "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
       "cmakeExecutable": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake",
       "variables": [
@@ -53,7 +53,7 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates/cmake/debug/obj/arm64-v8a"
+          "value": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/example/build/r_barcode/intermediates/cmake/debug/obj/arm64-v8a"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
@@ -70,14 +70,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
+  "cxxBuildFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
   "info": {
     "abi": "ARM64_V8A",
     "bitness": 64,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
+  "originalCxxBuildFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a",
   "variant": {
     "buildSystemArgumentList": [],
     "buildTargetSet": [],
@@ -95,12 +95,12 @@
         "ninjaExe": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja"
       },
       "cmakeToolchainFile": "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
-      "cxxFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx",
+      "cxxFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx",
       "gradleModulePathName": ":r_barcode",
-      "intermediatesFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates",
-      "makeFile": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/CMakeLists.txt",
-      "moduleBuildFile": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/build.gradle",
-      "moduleRootFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/android",
+      "intermediatesFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/example/build/r_barcode/intermediates",
+      "makeFile": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/src/main/cpp/CMakeLists.txt",
+      "moduleBuildFile": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/build.gradle",
+      "moduleRootFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
@@ -163,12 +163,12 @@
       ],
       "ndkVersion": "21.0.6113669",
       "project": {
-        "compilerSettingsCacheFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/android/.cxx",
-        "cxxFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/android/.cxx",
+        "compilerSettingsCacheFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/example/android/.cxx",
+        "cxxFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/example/android/.cxx",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/android",
+        "rootBuildGradleFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/example/android",
         "sdkFolder": "/Users/lipenghui/Library/Android/sdk"
       },
       "splitsAbiFilterSet": [],
@@ -184,7 +184,7 @@
         "SYSTEM": {}
       }
     },
-    "objFolder": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates/cmake/debug/obj",
+    "objFolder": "/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/example/build/r_barcode/intermediates/cmake/debug/obj",
     "variantName": "debug",
     "validAbiList": [
       "ARMEABI_V7A",

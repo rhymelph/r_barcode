@@ -1,2 +1,2 @@
-ninja: Entering directory `/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a'
+ninja: Entering directory `/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a'
 ninja: no work to do.

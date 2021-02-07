@@ -123,6 +123,8 @@ class RBarcodeCameraValue {
   // camera resolution preset
   final RBarcodeCameraResolutionPreset resolutionPreset;
 
+  final bool isDebug;
+
   const RBarcodeCameraValue(
       {this.isInitialized,
       this.errorDescription,
@@ -130,12 +132,14 @@ class RBarcodeCameraValue {
       this.formats,
       this.isTorchOn,
       this.description,
-      this.resolutionPreset});
+      this.resolutionPreset,
+      this.isDebug});
 
   const RBarcodeCameraValue.uninitialized()
       : this(
           isInitialized: false,
           isTorchOn: false,
+          isDebug: true,
         );
 
   double get aspectRatio => previewSize.height / previewSize.width;
@@ -150,6 +154,7 @@ class RBarcodeCameraValue {
     List<RBarcodeFormat> formats,
     RBarcodeCameraDescription description,
     RBarcodeCameraResolutionPreset resolutionPreset,
+    bool isDebug,
   }) {
     return RBarcodeCameraValue(
       isInitialized: isInitialized ?? this.isInitialized,
@@ -159,6 +164,7 @@ class RBarcodeCameraValue {
       formats: formats ?? this.formats,
       description: description ?? this.description,
       resolutionPreset: resolutionPreset ?? this.resolutionPreset,
+      isDebug: isDebug ?? this.isDebug,
     );
   }
 
@@ -180,12 +186,14 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
     RBarcodeCameraDescription description,
     RBarcodeCameraResolutionPreset resolutionPreset, {
     List<RBarcodeFormat> formats,
+    bool isDebug,
   })  : assert(description != null),
         assert(resolutionPreset != null),
         super(RBarcodeCameraValue.uninitialized().copyWith(
           description: description,
           resolutionPreset: resolutionPreset,
           formats: formats,
+          isDebug: isDebug ?? true,
         ));
 
   bool _isDisposed = false; // when the widget dispose will set true
@@ -202,7 +210,8 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
     try {
       final Map<String, dynamic> reply = await RBarcode._initialize(
           value.description.name,
-          _serializeResolutionPreset(value.resolutionPreset));
+          _serializeResolutionPreset(value.resolutionPreset),
+      value.isDebug);
       _textureId = reply['textureId'];
 
       await setBarcodeFormats(value.formats ?? RBarcode._globalFormat);

@@ -89,12 +89,13 @@ class RBarcodeEngine {
      * @param messenger Flutter与原生通信的x信使
      * @param eventId 事件id
      */
-    fun initEventChannel(messenger: BinaryMessenger, eventId: Long) {
+    fun initEventChannel(messenger: BinaryMessenger, eventId: Long, isDebug: Boolean) {
         if (eventChannel != null) {
             eventChannel!!.dispose()
         } else {
             eventChannel = RBarcodeEventChannel(messenger, eventId)
         }
+        this.isDebug = isDebug
     }
 
     /**
@@ -215,7 +216,7 @@ class RBarcodeEngine {
             decodeResult = decodeImage(entity.y, entity.width, entity.height)
             log("thread:" + Thread.currentThread() + "  decodeImage first:" + (System.currentTimeMillis() - firstTime) + "ms")
             val secondTime = System.currentTimeMillis()
-            if (decodeResult == null&&!isOnlyQrCodeFormat()) {
+            if (decodeResult == null && !isOnlyQrCodeFormat()) {
                 // y图旋转
                 val rotateYByte = ByteArray(entity.width * entity.height * 3 / 2)
                 ImageUtils.rotateYUVDegree90(entity.y, rotateYByte, entity.width, entity.height)

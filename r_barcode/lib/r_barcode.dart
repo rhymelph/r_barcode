@@ -76,10 +76,11 @@ class RBarcode {
   /// [cameraName] 相机名字
   /// [resolutionPreset] 相机分辨率
   static Future<Map<String, dynamic>> _initialize(
-          String cameraName, String resolutionPreset) async =>
+          String cameraName, String resolutionPreset, bool isDebug) async =>
       await _channel.invokeMapMethod('initialize', <String, dynamic>{
         'cameraName': cameraName,
         'resolutionPreset': resolutionPreset,
+        'isDebug': isDebug,
       });
 
   /// 关闭视图的时候调用

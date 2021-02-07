@@ -99,7 +99,7 @@ rule CXX_STATIC_LIBRARY_LINKER__yuv
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake -H/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp -B/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/arm64-v8a
+  command = /Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake -H/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/src/main/cpp -B/Users/lipenghui/Documents/flutter_project/rSeries/r_barcode_plugin/r_barcode/android/.cxx/cmake/debug/arm64-v8a
   description = Re-running CMake...
   generator = 1
 
