@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86'
+ninja: no work to do.

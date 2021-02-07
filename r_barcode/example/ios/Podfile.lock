@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - r_barcode (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - r_barcode (from `.symlinks/plugins/r_barcode/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  r_barcode:
+    :path: ".symlinks/plugins/r_barcode/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  r_barcode: 22f411508b7dcbc399ad80c1e2313f55fc003902
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.9.1

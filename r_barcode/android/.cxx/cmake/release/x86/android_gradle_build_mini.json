@@ -1,0 +1,39 @@
+{
+  "buildFiles": [
+    "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
+    "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake",
+    "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/CMakeLists.txt",
+    "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/CM_linux_packages.cmake",
+    "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "yuv_shared-Release-x86": {
+      "artifactName": "yuv_shared",
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86\" yuv_shared",
+      "abi": "x86",
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates/cmake/release/obj/x86/libyuv.so"
+    },
+    "native-r_barcode-Release-x86": {
+      "artifactName": "native-r_barcode",
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86\" native-r_barcode",
+      "abi": "x86",
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates/cmake/release/obj/x86/libnative-r_barcode.so"
+    },
+    "yuv-Release-x86": {
+      "artifactName": "yuv",
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86\" yuv",
+      "abi": "x86",
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86/build/libyuv.a"
+    },
+    "yuvconvert-Release-x86": {
+      "artifactName": "yuvconvert",
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86\" yuvconvert",
+      "abi": "x86",
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/release/x86/build/yuvconvert"
+    }
+  }
+}

@@ -1,0 +1,566 @@
+{
+  "stringTable": {
+    "0": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dnative_r_barcode_EXPORTS -I/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC",
+    "2": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dyuv_shared_EXPORTS -I/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC",
+    "3": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIE",
+    "4": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -I/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/build/cmake/android.toolchain.cmake",
+    "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/build/cmake/platforms.cmake",
+    "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/CMakeLists.txt",
+    "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/CM_linux_packages.cmake",
+    "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "yuvconvert-Debug-x86_64": {
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64\" yuvconvert",
+      "buildType": "debug",
+      "toolchain": "1443510833",
+      "abi": "x86_64",
+      "artifactName": "yuvconvert",
+      "files": [
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/util/yuvconvert.cc",
+          "flagsOrdinal": 3,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64/build/yuvconvert"
+    },
+    "yuv-Debug-x86_64": {
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64\" yuv",
+      "buildType": "debug",
+      "toolchain": "1443510833",
+      "abi": "x86_64",
+      "artifactName": "yuv",
+      "files": [
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_from.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_from_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_jpeg.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_to_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_to_i420.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/cpu_id.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/mjpeg_decoder.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/mjpeg_validate.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/planar_functions.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_any.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_any.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_any.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/video_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64/build/libyuv.a"
+    },
+    "yuv_shared-Debug-x86_64": {
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64\" yuv_shared",
+      "buildType": "debug",
+      "toolchain": "1443510833",
+      "abi": "x86_64",
+      "artifactName": "yuv_shared",
+      "files": [
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/compare_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_from.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_from_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_jpeg.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_to_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/convert_to_i420.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/cpu_id.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/mjpeg_decoder.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/mjpeg_validate.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/planar_functions.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_any.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/rotate_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_any.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/row_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_any.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_argb.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_gcc.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_mmi.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_msa.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_neon.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_neon64.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/scale_win.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/libyuv/source/video_common.cc",
+          "flagsOrdinal": 4,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates/cmake/debug/obj/x86_64/libyuv.so"
+    },
+    "native-r_barcode-Debug-x86_64": {
+      "buildCommand": "/Users/lipenghui/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/lipenghui/Documents/flutter_project/r_barcode/android/.cxx/cmake/debug/x86_64\" native-r_barcode",
+      "buildType": "debug",
+      "toolchain": "1443510833",
+      "abi": "x86_64",
+      "artifactName": "native-r_barcode",
+      "files": [
+        {
+          "src": "/Users/lipenghui/Documents/flutter_project/r_barcode/android/src/main/cpp/native-r_barcode.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/lipenghui/Documents/flutter_project/r_barcode/example/build/r_barcode/intermediates/cmake/debug/obj/x86_64/libnative-r_barcode.so"
+    }
+  },
+  "toolchains": {
+    "1443510833": {
+      "cppCompilerExecutable": "/Users/lipenghui/Library/Android/sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cc",
+    "cpp"
+  ]
+}
