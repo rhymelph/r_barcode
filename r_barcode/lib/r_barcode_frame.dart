@@ -40,12 +40,12 @@ final Animatable<double> _kRotationTween = CurveTween(curve: const SawTooth(5));
 /// [scanStatus] You can find in [BarcodeScanStatus]
 /// [scanType] You can find in [BarcodeScanType]
 class MaterialBarCodeFrameWidget extends StatefulWidget {
-  final Widget child;
-  final BarcodeScanStatus scanStatus;
-  final BarcodeScanType scanType;
+  final Widget? child;
+  final BarcodeScanStatus? scanStatus;
+  final BarcodeScanType? scanType;
 
   const MaterialBarCodeFrameWidget(
-      {Key key, this.child, this.scanStatus, this.scanType})
+      {Key? key, this.child, this.scanStatus, this.scanType})
       : super(key: key);
 
   @override
@@ -55,7 +55,7 @@ class MaterialBarCodeFrameWidget extends StatefulWidget {
 
 class _MaterialBarCodeFrameWidgetState extends State<MaterialBarCodeFrameWidget>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   final Animatable<double> _startExpandColor = CurveTween(
     curve: const Interval(0.0, 0.3, curve: Curves.fastOutSlowIn),
@@ -69,8 +69,8 @@ class _MaterialBarCodeFrameWidgetState extends State<MaterialBarCodeFrameWidget>
     curve: const SawTooth(5),
   ));
 
-  BarcodeScanStatus _scanType;
-  BarcodeScanStatus _widgetScanType;
+  BarcodeScanStatus? _scanType;
+  BarcodeScanStatus? _widgetScanType;
 
   @override
   void initState() {
@@ -94,7 +94,7 @@ class _MaterialBarCodeFrameWidgetState extends State<MaterialBarCodeFrameWidget>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return buildFrame(
           child,
           _expandAnimation.evaluate(_controller),
@@ -110,7 +110,7 @@ class _MaterialBarCodeFrameWidgetState extends State<MaterialBarCodeFrameWidget>
   }
 
   Widget buildFrame(
-      Widget child,
+      Widget? child,
       double expandValue,
       double startColorExpandValue,
       double headValue,
@@ -142,8 +142,9 @@ class _MaterialBarCodeFrameWidgetState extends State<MaterialBarCodeFrameWidget>
         return MediaQuery.of(context).size.width - 160;
       case BarcodeScanType.barCode:
         return 120;
+      default:
+        return 0;
     }
-    return 0;
   }
 
   double getPadding() {
@@ -152,8 +153,9 @@ class _MaterialBarCodeFrameWidgetState extends State<MaterialBarCodeFrameWidget>
         return 80;
       case BarcodeScanType.barCode:
         return 40;
+      default:
+        return 0;
     }
-    return 0;
   }
 
   @override
@@ -183,7 +185,7 @@ class MaterialBarCodeFrame extends CustomPainter {
 
   final Radius radius;
 
-  final BarcodeScanStatus status;
+  final BarcodeScanStatus? status;
 
   MaterialBarCodeFrame(
       {this.expandProgress: 0.4,
@@ -193,10 +195,10 @@ class MaterialBarCodeFrame extends CustomPainter {
       this.minStrokeWidth: 2,
       this.radius: const Radius.circular(8),
       this.expandStartColor,
-      this.headValue,
-      this.tailValue,
-      this.rotationValue,
-      this.stepValue,
+      required this.headValue,
+      required this.tailValue,
+      required this.rotationValue,
+      required this.stepValue,
       this.status: BarcodeScanStatus.loading})
       : arcStart = _startAngle +
             tailValue * 3 / 2 * math.pi +
@@ -207,18 +209,18 @@ class MaterialBarCodeFrame extends CustomPainter {
             _epsilon);
 
   //画框
-  Paint _mPaint;
+  Paint? _mPaint;
 
   //画扩展
-  Paint _expandPaint;
-  Paint _mMaskPaint;
+  Paint? _expandPaint;
+  late Paint _mMaskPaint;
   final double strokeWidth;
   final double minStrokeWidth;
   final double expandProgress;
-  final double expandStartColor;
+  final double? expandStartColor;
 
   //画进度
-  Paint _mProgressPaint;
+  late Paint _mProgressPaint;
   final double headValue;
   final double tailValue;
   final int stepValue;
@@ -280,18 +282,18 @@ class MaterialBarCodeFrame extends CustomPainter {
               height + strokeWidth),
           _mMaskPaint);
       canvas.drawRRect(
-          RRect.fromLTRBR(left, top, right, bottom, radius), _mPaint);
+          RRect.fromLTRBR(left, top, right, bottom, radius), _mPaint!);
     }
 
     //扩展动画
     void drawExpandIndicator() {
-      _expandPaint.strokeWidth = minStrokeWidth +
+      _expandPaint!.strokeWidth = minStrokeWidth +
           (strokeWidth - minStrokeWidth) * (1 - expandProgress);
       if (expandStartColor != 0) {
-        _expandPaint.color = Colors.white.withOpacity(expandStartColor);
+        _expandPaint!.color = Colors.white.withOpacity(expandStartColor!);
       }
       if (expandProgress != 0) {
-        _expandPaint.color = Colors.white.withOpacity(1 - expandProgress);
+        _expandPaint!.color = Colors.white.withOpacity(1 - expandProgress);
       }
       canvas.drawRRect(
           RRect.fromLTRBR(
@@ -300,7 +302,7 @@ class MaterialBarCodeFrame extends CustomPainter {
               right + padding * expandProgress,
               bottom + padding * expandProgress,
               radius),
-          _expandPaint);
+          _expandPaint!);
     }
 
     //圆角进度
@@ -337,10 +339,10 @@ class MaterialBarCodeFrame extends CustomPainter {
 /// 支付宝风格的扫描框
 ///
 class AlipayFrameWidget extends StatefulWidget {
-  final Widget child;
-  final BarcodeScanStatus scanStatus;
+  final Widget? child;
+  final BarcodeScanStatus? scanStatus;
 
-  const AlipayFrameWidget({Key key, this.child, this.scanStatus})
+  const AlipayFrameWidget({Key? key, this.child, this.scanStatus})
       : super(key: key);
 
   @override
@@ -349,7 +351,7 @@ class AlipayFrameWidget extends StatefulWidget {
 
 class _AlipayFrameWidgetState extends State<AlipayFrameWidget>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
   final Animatable<double> _startColorAnim = CurveTween(
     curve: const Interval(0.0, 0.2, curve: Curves.fastOutSlowIn),
   ).chain(CurveTween(
@@ -390,7 +392,7 @@ class _AlipayFrameWidgetState extends State<AlipayFrameWidget>
     );
   }
 
-  Widget _buildWidget(BuildContext context, Widget child) {
+  Widget _buildWidget(BuildContext context, Widget? child) {
     return CustomPaint(
       foregroundPainter: AlipayFrame(
         indicatorColor: Theme.of(context).primaryColor,
@@ -421,9 +423,9 @@ class AlipayFrame extends CustomPainter {
   final Color indicatorColor;
   final double progress;
   final double colorProgress;
-  Paint _mPaint;
-  Paint _mBPaint;
-  final BarcodeScanStatus status;
+  Paint? _mPaint;
+  Paint? _mBPaint;
+  final BarcodeScanStatus? status;
 
   AlipayFrame({
     this.indicatorSize: const Size(250, 2),
@@ -457,7 +459,7 @@ class AlipayFrame extends CustomPainter {
 
     void drawProgressIndicator() {
       if (progress != 0) {
-        _mBPaint.shader = LinearGradient(colors: [
+        _mBPaint!.shader = LinearGradient(colors: [
           indicatorColor.withOpacity(0.3 * (1 - colorProgress)),
           indicatorColor.withOpacity(1 - colorProgress),
           indicatorColor.withOpacity(0.3 * (1 - colorProgress)),
@@ -467,7 +469,7 @@ class AlipayFrame extends CustomPainter {
           1.0
         ]).createShader(Offset(leftPadding, topPadding) & moveSize);
       } else {
-        _mBPaint.shader = LinearGradient(colors: [
+        _mBPaint!.shader = LinearGradient(colors: [
           indicatorColor.withOpacity(0.3 * (1 - colorProgress)),
           indicatorColor.withOpacity(1 - colorProgress),
           indicatorColor.withOpacity(0.3 * (1 - colorProgress)),
@@ -483,7 +485,7 @@ class AlipayFrame extends CustomPainter {
     void drawScanIndicator() {
       //画线
       Rect indicatorRect = Offset(leftPadding, topPadding) & indicatorSize;
-      _mPaint.shader = LinearGradient(colors: [
+      _mPaint!.shader = LinearGradient(colors: [
         indicatorColor.withOpacity(0.3 * (1 - colorProgress)),
         indicatorColor.withOpacity(1 - colorProgress),
         indicatorColor.withOpacity(0.3 * (1 - colorProgress)),
@@ -492,10 +494,10 @@ class AlipayFrame extends CustomPainter {
         0.5,
         1.0
       ]).createShader(indicatorRect);
-      canvas.drawRect(indicatorRect, _mPaint);
+      canvas.drawRect(indicatorRect, _mPaint!);
 
       //画跟随的矩形
-      _mBPaint.shader = RadialGradient(center: Alignment.topCenter, colors: [
+      _mBPaint!.shader = RadialGradient(center: Alignment.topCenter, colors: [
         indicatorColor.withOpacity(1 - colorProgress),
         indicatorColor.withOpacity(0.0 * (1 - colorProgress)),
       ]).createShader(Offset(leftPadding, topPadding) & moveSize);
@@ -516,12 +518,12 @@ class AlipayFrame extends CustomPainter {
             Offset(leftPadding + i * moveSize.width / space, topParentPadding),
             Offset(leftPadding + i * moveSize.width / space,
                 topParentPadding + moveSize.height),
-            _mBPaint);
+            _mBPaint!);
         canvas.drawLine(
             Offset(leftPadding, topParentPadding + i * moveSize.height / space),
             Offset(leftPadding + moveSize.width,
                 topParentPadding + i * moveSize.height / space),
-            _mBPaint);
+            _mBPaint!);
       }
     }
   }

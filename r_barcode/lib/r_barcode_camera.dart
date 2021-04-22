@@ -10,8 +10,8 @@ class RBarcodeCameraDescription {
     this.lensDirection,
   });
 
-  final String name;
-  final RBarcodeCameraLensDirection lensDirection;
+  final String? name;
+  final RBarcodeCameraLensDirection? lensDirection;
 
   @override
   bool operator ==(Object o) {
@@ -37,7 +37,7 @@ class RBarcodeCameraDescription {
 /// [RBarcodeCameraLensDirection.external] 扩展相机
 enum RBarcodeCameraLensDirection { front, back, external }
 
-RBarcodeCameraLensDirection _parseCameraLensDirection(String string) {
+RBarcodeCameraLensDirection _parseCameraLensDirection(String? string) {
   switch (string) {
     case 'front':
       return RBarcodeCameraLensDirection.front;
@@ -74,7 +74,7 @@ enum RBarcodeCameraResolutionPreset {
 
 /// Returns the resolution preset as a String.
 String _serializeResolutionPreset(
-    RBarcodeCameraResolutionPreset resolutionPreset) {
+    RBarcodeCameraResolutionPreset? resolutionPreset) {
   switch (resolutionPreset) {
     case RBarcodeCameraResolutionPreset.max:
       return 'max';
@@ -88,8 +88,9 @@ String _serializeResolutionPreset(
       return 'medium';
     case RBarcodeCameraResolutionPreset.low:
       return 'low';
+    default:
+      throw ArgumentError('Unknown ResolutionPreset value');
   }
-  throw ArgumentError('Unknown ResolutionPreset value');
 }
 
 /// 二维码扫描对应的相机内容
@@ -103,27 +104,27 @@ String _serializeResolutionPreset(
 /// [resolutionPreset] 分辨率
 class RBarcodeCameraValue {
   //camera is initialized.
-  final bool isInitialized;
+  final bool? isInitialized;
 
   //error info.
-  final String errorDescription;
+  final String? errorDescription;
 
   // preview size.
-  final Size previewSize;
+  final Size? previewSize;
 
   // Is torch open.
-  final bool isTorchOn;
+  final bool? isTorchOn;
 
   // barcode format.
-  final List<RBarcodeFormat> formats;
+  final List<RBarcodeFormat>? formats;
 
   // camera description
-  final RBarcodeCameraDescription description;
+  final RBarcodeCameraDescription? description;
 
   // camera resolution preset
-  final RBarcodeCameraResolutionPreset resolutionPreset;
+  final RBarcodeCameraResolutionPreset? resolutionPreset;
 
-  final bool isDebug;
+  final bool? isDebug;
 
   const RBarcodeCameraValue(
       {this.isInitialized,
@@ -142,19 +143,19 @@ class RBarcodeCameraValue {
           isDebug: true,
         );
 
-  double get aspectRatio => previewSize.height / previewSize.width;
+  double get aspectRatio => previewSize!.height / previewSize!.width;
 
   bool get hasError => errorDescription != null;
 
   RBarcodeCameraValue copyWith({
-    bool isInitialized,
-    String errorDescription,
-    Size previewSize,
-    bool isTorchOn,
-    List<RBarcodeFormat> formats,
-    RBarcodeCameraDescription description,
-    RBarcodeCameraResolutionPreset resolutionPreset,
-    bool isDebug,
+    bool? isInitialized,
+    String? errorDescription,
+    Size? previewSize,
+    bool? isTorchOn,
+    List<RBarcodeFormat>? formats,
+    RBarcodeCameraDescription? description,
+    RBarcodeCameraResolutionPreset? resolutionPreset,
+    bool? isDebug,
   }) {
     return RBarcodeCameraValue(
       isInitialized: isInitialized ?? this.isInitialized,
@@ -185,11 +186,9 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
   RBarcodeCameraController(
     RBarcodeCameraDescription description,
     RBarcodeCameraResolutionPreset resolutionPreset, {
-    List<RBarcodeFormat> formats,
-    bool isDebug,
-  })  : assert(description != null),
-        assert(resolutionPreset != null),
-        super(RBarcodeCameraValue.uninitialized().copyWith(
+    List<RBarcodeFormat>? formats,
+    bool? isDebug,
+  })  : super(RBarcodeCameraValue.uninitialized().copyWith(
           description: description,
           resolutionPreset: resolutionPreset,
           formats: formats,
@@ -197,24 +196,24 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
         ));
 
   bool _isDisposed = false; // when the widget dispose will set true
-  Completer<void> _creatingCompleter; // when the camera create finish
-  int _textureId; // init finish will return id
-  StreamSubscription<dynamic> _resultSubscription; //the result subscription
-  RBarcodeResult result;
-  bool isScanning;
+  Completer<void>? _creatingCompleter; // when the camera create finish
+  int? _textureId; // init finish will return id
+  StreamSubscription<dynamic>? _resultSubscription; //the result subscription
+  RBarcodeResult? result;
+  bool? isScanning;
 
   /// 初始化相机控制器
   Future<void> initialize() async {
     if (_isDisposed) return Future<void>.value();
     _creatingCompleter = Completer();
     try {
-      final Map<String, dynamic> reply = await RBarcode._initialize(
-          value.description.name,
+      final Map<String, dynamic> reply = await (RBarcode._initialize(
+          value.description!.name,
           _serializeResolutionPreset(value.resolutionPreset),
-      value.isDebug);
+          value.isDebug) as FutureOr<Map<String, dynamic>>);
       _textureId = reply['textureId'];
 
-      await setBarcodeFormats(value.formats ?? RBarcode._globalFormat);
+      await setBarcodeFormats(value.formats ?? RBarcode._globalFormat!);
 
       value = value.copyWith(
           isInitialized: true,
@@ -230,21 +229,21 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
       //当发生权限问题的异常时会抛出
       throw RBarcodeException(e.code, e.message);
     }
-    _creatingCompleter.complete();
-    return _creatingCompleter.future;
+    _creatingCompleter!.complete();
+    return _creatingCompleter!.future;
   }
 
   /// 是否打开闪光灯
-  Future<bool> isTorchOn() async {
-    bool isTorchOn = await RBarcode._isTorchOn();
+  Future<bool?> isTorchOn() async {
+    bool? isTorchOn = await RBarcode._isTorchOn();
     value = value.copyWith(isTorchOn: isTorchOn);
     return isTorchOn;
   }
 
   /// 设置闪光灯
   /// [isTorchOn] 打开/关闭闪光灯
-  Future<bool> setTorchOn(bool isTorchOn) async {
-    bool result = await RBarcode._enableTorch(isTorchOn);
+  Future<bool?> setTorchOn(bool isTorchOn) async {
+    bool? result = await RBarcode._enableTorch(isTorchOn);
     value = value.copyWith(isTorchOn: result);
     return result;
   }
@@ -266,6 +265,8 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
   }
 
   /// 请求聚焦
+  /// [x] 0~1
+  /// [y] 0~1
   Future<void> requestFocus(
       double x, double y, double width, double height) async {
     await RBarcode._requestFocus(x, y, width, height);
@@ -277,7 +278,6 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
   Future<void> setBarcodeFormats(List<RBarcodeFormat> formats) async {
     await RBarcode._setBarcodeFormats(formats);
     value = value.copyWith(formats: formats);
-    return result;
   }
 
   //处理返回值
@@ -302,7 +302,7 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
     _isDisposed = true;
     super.dispose();
     if (_creatingCompleter != null) {
-      await _creatingCompleter.future;
+      await _creatingCompleter!.future;
       await RBarcode._disposeTexture(_textureId);
       await _resultSubscription?.cancel();
     }

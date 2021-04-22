@@ -28,7 +28,7 @@ const _kPluginType = 'com.rhyme_lph/r_barcode';
 ///
 class RBarcode {
   static const MethodChannel _channel = const MethodChannel(_kPluginType);
-  static List<RBarcodeFormat> _globalFormat;
+  static List<RBarcodeFormat>? _globalFormat;
 
   /// 初始化二维码引擎
   /// [formats] 支持的那些格式的二维码
@@ -36,12 +36,12 @@ class RBarcode {
   /// [isReturnImage]是否需要返回扫描成功后的图片
   static Future<void> initBarcodeEngine({
     List<RBarcodeFormat> formats: RBarcodeFormat.kAll,
-    bool isDebug,
+    bool? isDebug,
     bool isReturnImage: false,
   }) {
     _globalFormat = formats;
     return _channel.invokeMethod('initBarcodeEngine', {
-      'formats': formats?.map((e) => e._value)?.toList(),
+      'formats': formats.map((e) => e._value).toList(),
       'isDebug': isDebug,
       'isReturnImage': isReturnImage,
     });
@@ -50,17 +50,17 @@ class RBarcode {
   /// 获取所有可用的相机
   ///
   /// 返回相机列表 , 用于相机的初始化 [RBarcodeCameraController]
-  static Future<List<RBarcodeCameraDescription>>
+  static Future<List<RBarcodeCameraDescription>?>
       availableBarcodeCameras() async {
     try {
-      final List<Map<dynamic, dynamic>> cameras = await _channel
+      final List<Map<dynamic, dynamic>>? cameras = await _channel
           .invokeListMethod<Map<dynamic, dynamic>>('availableCameras');
       return cameras
           ?.map((Map<dynamic, dynamic> camera) => RBarcodeCameraDescription(
                 name: camera['name'],
                 lensDirection: _parseCameraLensDirection(camera['lensFacing']),
               ))
-          ?.toList();
+          .toList();
     } on PlatformException catch (e) {
       throw RBarcodeException(e.code, e.message);
     }
@@ -75,8 +75,8 @@ class RBarcode {
   /// 初始化相机
   /// [cameraName] 相机名字
   /// [resolutionPreset] 相机分辨率
-  static Future<Map<String, dynamic>> _initialize(
-          String cameraName, String resolutionPreset, bool isDebug) async =>
+  static Future<Map<String, dynamic>?> _initialize(
+          String? cameraName, String resolutionPreset, bool? isDebug) async =>
       await _channel.invokeMapMethod('initialize', <String, dynamic>{
         'cameraName': cameraName,
         'resolutionPreset': resolutionPreset,
@@ -84,18 +84,18 @@ class RBarcode {
       });
 
   /// 关闭视图的时候调用
-  static Future<void> _disposeTexture(int textureId) async =>
+  static Future<void> _disposeTexture(int? textureId) async =>
       await _channel.invokeMethod('dispose', {
         'textureId': textureId,
       });
 
   /// 是否打开闪光灯
-  static Future<bool> _isTorchOn() async =>
+  static Future<bool?> _isTorchOn() async =>
       await _channel.invokeMethod('isTorchOn');
 
   /// 设置闪光灯
   /// [isTorchOn] 打开/关闭闪光灯
-  static Future<bool> _enableTorch(bool isTorchOn) async =>
+  static Future<bool?> _enableTorch(bool isTorchOn) async =>
       await _channel.invokeMethod('enableTorch', {
         'isTorchOn': isTorchOn,
       });
@@ -111,13 +111,16 @@ class RBarcode {
   /// 请求聚焦
   ///
   /// [x] 对应屏幕的x轴
+  /// [y] 对应屏幕的y轴
+  /// [width] 聚焦的宽度
+  /// [height] 聚焦的高度
   static Future<void> _requestFocus(
           double x, double y, double width, double height) async =>
       await _channel.invokeMethod('requestFocus', {
         'x': x,
         'y': y,
         'width': width,
-        'height:': height,
+        'height': height,
       });
 }
 
@@ -128,15 +131,18 @@ class RBarcode {
 /// 用于在视图上显示组件
 class RBarcodeCamera extends StatelessWidget {
   final RBarcodeCameraController controller;
+  final Widget? initWidget;
 
-  const RBarcodeCamera(this.controller, {Key key}) : super(key: key);
+  const RBarcodeCamera(this.controller, {Key? key, this.initWidget})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return controller.value.isInitialized
-        ? Texture(textureId: controller._textureId)
-        : Container(
-            color: Colors.black,
-          );
+    return controller.value.isInitialized!
+        ? Texture(textureId: controller._textureId!)
+        : (initWidget ??
+            Container(
+              color: Colors.black,
+            ));
   }
 }

@@ -85,6 +85,17 @@ public class SwiftRBarcodePlugin: NSObject, FlutterPlugin {
             }else{
                 result(FlutterError(code: "Error", message: "Camera View is null", details: nil))
             }
+        case "requestFocus":
+            if(rBarcodeCameraView != nil){
+                let y = map!["y"] as! NSNumber
+                let x = map!["x"] as! NSNumber
+                let width = map!["width"] as! NSNumber
+                let height = map!["height"] as! NSNumber
+                try? result(rBarcodeCameraView.requestFocus(x, y: y, width: width, height: height))
+
+            }else{
+                result(FlutterError(code: "Error", message: "Camera View is null", details: nil))
+            }
         default:
             result(FlutterMethodNotImplemented)
         }

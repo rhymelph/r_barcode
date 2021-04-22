@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 /// 扫描成功后，会在界面上对应的二维码位置上弹出一个小圆点
 /// [size] 圆点的大小
 class RBarCodeCircleIndicator extends StatefulWidget {
-  final Size size;
+  final Size? size;
 
   const RBarCodeCircleIndicator({
-    Key key,
+    Key? key,
     this.size,
   }) : super(key: key);
 
@@ -19,10 +19,10 @@ class RBarCodeCircleIndicator extends StatefulWidget {
 
 class _RBarCodeCircleIndicatorState extends State<RBarCodeCircleIndicator>
     with TickerProviderStateMixin {
-  AnimationController _controller;
-  CurvedAnimation curve;
-  AnimationController _finishController;
-  Animation<double> _finishValue;
+  late AnimationController _controller;
+  late CurvedAnimation curve;
+  late AnimationController _finishController;
+  late Animation<double> _finishValue;
   @override
   void initState() {
     super.initState();
@@ -57,7 +57,7 @@ class _RBarCodeCircleIndicatorState extends State<RBarCodeCircleIndicator>
     );
   }
 
-  Widget _buildAnimatedWidget(BuildContext context, Widget child) {
+  Widget _buildAnimatedWidget(BuildContext context, Widget? child) {
     if(_controller.status == AnimationStatus.completed){
       return AnimatedBuilder(animation: _finishController, builder: (ctx,child)=>CustomPaint(
         painter: RBarCodeCircleIndicatorPainter(
@@ -88,12 +88,12 @@ class _RBarCodeCircleIndicatorState extends State<RBarCodeCircleIndicator>
 /// [radius] 圆点半径
 ///
 class RBarCodeCircleIndicatorPainter extends CustomPainter {
-  final double progress;
+  final double? progress;
   final Color outColor;
   final Color innerColor;
-  final double radius;
-  Paint _mPaint1;
-  Paint _mPaint2;
+  final double? radius;
+  Paint? _mPaint1;
+  Paint? _mPaint2;
 
   RBarCodeCircleIndicatorPainter(
       {this.progress,
@@ -115,13 +115,13 @@ class RBarCodeCircleIndicatorPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (_mPaint2 == null || _mPaint1 == null) initPaint();
 
-    double innerRadius = radius * 2 / 3;
+    double innerRadius = radius! * 2 / 3;
 
     canvas.drawCircle(
-        Offset(size.width / 2, size.height / 2), radius * (progress), _mPaint2);
+        Offset(size.width / 2, size.height / 2), radius! * progress!, _mPaint2!);
 
     canvas.drawCircle(Offset(size.width / 2, size.height / 2),
-        innerRadius * progress, _mPaint1);
+        innerRadius * progress!, _mPaint1!);
   }
 
   @override

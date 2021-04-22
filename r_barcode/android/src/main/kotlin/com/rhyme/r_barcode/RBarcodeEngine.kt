@@ -153,6 +153,10 @@ class RBarcodeEngine {
         isScan = false
     }
 
+    fun isScanning(): Boolean {
+        return isScan
+    }
+
     private var latestAcquireImageTime: Long = System.currentTimeMillis()
     private var latestScanSuccessTime: Long = System.currentTimeMillis()
 
@@ -336,8 +340,8 @@ class RBarcodeEngine {
             for (point in result.resultPoints) {
                 val pointMap: MutableMap<String, Any> = HashMap()
                 if (isRotate) {
-                    pointMap["x"] = point.x / height
-                    pointMap["y"] = point.y / width
+                    pointMap["x"] = (height - point.x) / height
+                    pointMap["y"] = (width - point.y) / width
                 } else {
                     pointMap["y"] = point.x / width
                     pointMap["x"] = (height - point.y) / height

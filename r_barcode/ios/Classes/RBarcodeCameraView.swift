@@ -238,6 +238,18 @@ class RBarcodeCameraView :NSObject,FlutterTexture, AVCaptureVideoDataOutputSampl
         }
     }
     
+    func requestFocus(_ x:NSNumber,y:NSNumber,width:NSNumber,height:NSNumber) throws ->Bool{
+        if(captureDevice.isFocusPointOfInterestSupported && captureDevice.isFocusModeSupported(.autoFocus)){
+            try captureDevice!.lockForConfiguration()
+            captureDevice.focusMode = .autoFocus
+            captureDevice.focusPointOfInterest=CGPoint(x: x.doubleValue,y: y.doubleValue)
+            captureDevice!.unlockForConfiguration()
+        }else{
+            return false
+        }
+        return false
+    }
+    
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if isReturnImage==true {

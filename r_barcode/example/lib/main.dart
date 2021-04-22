@@ -17,9 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: HomePage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
   }
 }
 
@@ -131,7 +129,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   void _handleFlashToggle() async {
-    await _controller?.setTorchOn(!(_controller?.value.isTorchOn ?? false));
+    await _controller?.setTorchOn(!(_controller?.value?.isTorchOn ?? false));
     HapticFeedback.heavyImpact();
     setState(() {});
   }
@@ -150,6 +148,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 if (_result?.image != null) buildFrame(),
                 if (_result?.points != null) buildPoints(),
                 if (_result?.text != null) buildText(),
+                if (_result?.format != null) buildFormat(),
               ],
             )
           : Container(
@@ -161,19 +160,35 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   Widget buildFrame() => Positioned(
-        left: 21,
-        top: 60,
+        right: 12,
+        top: MediaQuery.of(context).padding.top + 77,
         child: Image.memory(
           _controller.result.image,
-          width: 200,
-          height: 200,
+          width: 80,
+          height: 140,
+        ),
+      );
+
+  Widget buildFormat() => Positioned(
+        left: 0,
+        right: 0,
+        top: MediaQuery.of(context).padding.top + 33,
+        child: Container(
+          padding: EdgeInsets.all(8),
+          color: Colors.black45,
+          child: Text(
+            _controller.result.format.toString(),
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  color: Colors.red,
+                ),
+          ),
         ),
       );
 
   Widget buildText() => Positioned(
         left: 0,
         right: 0,
-        top: 50,
+        top: MediaQuery.of(context).padding.top,
         child: Container(
           padding: EdgeInsets.all(8),
           color: Colors.black45,
@@ -245,8 +260,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           child: AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
             child: GestureDetector(
-                onTap: () {
-                  _controller.requestFocus(1.0, 1.0, 200, 200);
+                onTapDown: (detail) {
+                  _controller.requestFocus(
+                      detail.globalPosition.dx/MediaQuery.of(context).size.width,
+                      detail.globalPosition.dy /MediaQuery.of(context).size.height,
+                      100,
+                      100);
                 },
                 child: RBarcodeCamera(_controller)),
           ),

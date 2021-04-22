@@ -7,20 +7,20 @@ part of 'r_barcode.dart';
 /// [points] 二维码在图片中所在的位置
 /// [image] 如果设置了[RBarcode.initBarcodeEngine] 的[isReturnImage] 为true ，则会返回，默认是null
 class RBarcodeResult {
-  final RBarcodeFormat format;
-  final String text;
-  final List<RBarcodePoint> points;
-  final Uint8List image;
+  final RBarcodeFormat? format;
+  final String? text;
+  final List<RBarcodePoint>? points;
+  final Uint8List? image;
 
   const RBarcodeResult({this.image, this.format, this.text, this.points});
 
-  factory RBarcodeResult.formMap(Map map) {
+  factory RBarcodeResult.formMap(Map? map) {
     return map == null
-        ? null
+        ? RBarcodeResult()
         : RBarcodeResult(
       format:
       map['format'] != null ? RBarcodeFormat(map['format']) : null,
-      text: map['text'] as String,
+      text: map['text'] as String?,
       points: map['points'] != null
           ? (map['points'] as List)
           .map(
@@ -58,8 +58,8 @@ class RBarcodeResult {
 /// [x] 点，对应宽度的百分比
 /// [y] 点，对应高度的百分比
 class RBarcodePoint {
-  final double x;
-  final double y;
+  final double? x;
+  final double? y;
 
   RBarcodePoint(this.x, this.y);
 

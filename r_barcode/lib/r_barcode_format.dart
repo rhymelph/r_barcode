@@ -1,7 +1,7 @@
 part of 'r_barcode.dart';
 
 class RBarcodeFormat {
-  final String _value;
+  final String? _value;
 
   const RBarcodeFormat(this._value);
 
@@ -38,6 +38,7 @@ class RBarcodeFormat {
     Code93,
     Code128,
     EAN8,
+    EAN13,
     ITF,
     UPCA,
     UPCE,
@@ -56,6 +57,7 @@ class RBarcodeFormat {
     ITF,
     UPCA,
     UPCE,
+    EAN13,
   ];
 
   static const List<RBarcodeFormat> k2DFormats = const [
