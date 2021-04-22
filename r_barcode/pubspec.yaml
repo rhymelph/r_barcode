@@ -1,6 +1,6 @@
 name: r_barcode
 description: A new Flutter plugin about qrCode format and barCode format camera scan，basic texture view.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/rhymelph/r_barcode
 
 environment:
