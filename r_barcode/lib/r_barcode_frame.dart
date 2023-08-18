@@ -379,8 +379,8 @@ class _AlipayFrameWidgetState extends State<AlipayFrameWidget>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override

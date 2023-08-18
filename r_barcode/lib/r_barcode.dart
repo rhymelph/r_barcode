@@ -37,7 +37,7 @@ class RBarcode {
   static Future<void> initBarcodeEngine({
     List<RBarcodeFormat> formats: RBarcodeFormat.kAll,
     bool? isDebug,
-    bool isReturnImage: false,
+    bool isReturnImage = false,
   }) {
     _globalFormat = formats;
     return _channel.invokeMethod('initBarcodeEngine', {
@@ -122,6 +122,32 @@ class RBarcode {
         'width': width,
         'height': height,
       });
+
+  /// 解析图片路径
+  ///
+  /// [path] 图片路径
+  static Future<List<RBarcodeResult>?> decodeImagePath(String path) async =>
+      await _channel.invokeMethod('decodeImagePath', {
+        "path": path,
+      }).then((value) => value == null
+          ? null
+          : (value as List).map((e) => RBarcodeResult.formMap(e)).toList());
+
+  /// 解析图片地址
+  ///
+  /// [url] 地址
+  static Future<RBarcodeResult?> decodeImageUrl(String url) async =>
+      await _channel.invokeMethod('decodeImageUrl', {
+        "url": url,
+      }).then((value) => value == null ? null : RBarcodeResult.formMap(value));
+
+  /// 解析图片内存
+  ///
+  /// [uint8list] 内存
+  static Future<RBarcodeResult?> decodeImageMemory(Uint8List uint8list) async =>
+      await _channel.invokeMethod('decodeImageMemory', {
+        "uint8list": uint8list,
+      }).then((value) => value == null ? null : RBarcodeResult.formMap(value));
 }
 
 /// 相机组件

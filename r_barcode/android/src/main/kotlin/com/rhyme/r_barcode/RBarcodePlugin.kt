@@ -22,6 +22,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener
 import io.flutter.view.TextureRegistry
 import io.flutter.view.TextureRegistry.SurfaceTextureEntry
+import java.io.File
 
 /** RBarcodePlugin */
 public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -40,7 +41,7 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
         textureRegistry = flutterPluginBinding.textureRegistry
         messenger = flutterPluginBinding.binaryMessenger
-        channel = MethodChannel(messenger, pluginName)
+        channel = MethodChannel(messenger!!, pluginName)
         channel.setMethodCallHandler(this)
 
     }
@@ -51,15 +52,16 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
             val plugin = RBarcodePlugin()
-            val permissionsRegistry: RBarcodePermissions.PermissionsRegistry = object : RBarcodePermissions.PermissionsRegistry {
-                override fun addListener(handler: RequestPermissionsResultListener?) {
-                    registrar.addRequestPermissionsResultListener(handler)
+            val permissionsRegistry: RBarcodePermissions.PermissionsRegistry =
+                object : RBarcodePermissions.PermissionsRegistry {
+                    override fun addListener(handler: RequestPermissionsResultListener) {
+                        registrar.addRequestPermissionsResultListener(handler)
+                    }
                 }
-            }
             plugin.textureRegistry = registrar.textures()
             plugin.messenger = registrar.messenger()
 
-            plugin.activity = registrar.activity()
+            plugin.activity = registrar.activity()!!
             plugin.permissionsRegistry = permissionsRegistry
             val channel = MethodChannel(registrar.messenger(), pluginName)
             channel.setMethodCallHandler(plugin)
@@ -72,14 +74,17 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "initBarcodeEngine" -> {
                 rBarcodeEngine = RBarcodeEngine()
                 rBarcodeEngine!!.initBarCodeEngine(
-                        call.argument<Boolean>("isDebug") ?: true,
-                        call.argument<List<String>>("formats") ?: listOf(),
-                        call.argument<Boolean>("isReturnImage") ?: false)
+                    call.argument<Boolean>("isDebug") ?: true,
+                    call.argument<List<String>>("formats") ?: listOf(),
+                    call.argument<Boolean>("isReturnImage") ?: false
+                )
                 result.success(null)
             }
+
             "availableCameras" -> {
                 result.success(RBarcodeCameraConfiguration.get().getAvailableCameras(activity))
             }
+
             "initialize" -> {
                 if (rBarcodeCameraView != null) {
                     rBarcodeCameraView!!.close()
@@ -88,23 +93,24 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     rBarcodePermissions = RBarcodePermissions()
                 }
                 rBarcodePermissions!!.requestPermissions(
-                        activity,
-                        permissionsRegistry!!,
-                        object : RBarcodePermissions.ResultCallback {
-                            override fun onResult(errorCode: String?, errorDescription: String?) {
-                                if (errorCode == null) {
-                                    try {
-                                        instantiateCamera(call, result)
-                                    } catch (e: Exception) {
-                                        handleException(e, result)
-                                    }
-                                } else {
-                                    result.error(errorCode, errorDescription, null)
+                    activity,
+                    permissionsRegistry!!,
+                    object : RBarcodePermissions.ResultCallback {
+                        override fun onResult(errorCode: String?, errorDescription: String?) {
+                            if (errorCode == null) {
+                                try {
+                                    instantiateCamera(call, result)
+                                } catch (e: Exception) {
+                                    handleException(e, result)
                                 }
+                            } else {
+                                result.error(errorCode, errorDescription, null)
                             }
                         }
+                    }
                 )
             }
+
             "isTorchOn" -> {
                 if (rBarcodeCameraView != null) {
                     result.success(rBarcodeCameraView!!.isTorchOn())
@@ -112,6 +118,7 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     result.error("Error", "Camera View is null", null)
                 }
             }
+
             "enableTorch" -> {
                 if (rBarcodeCameraView != null) {
                     val isTorchOn = call.argument<Boolean>("isTorchOn") ?: false
@@ -121,6 +128,7 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     result.error("Error", "Camera View is null", null)
                 }
             }
+
             "dispose" -> {
                 if (rBarcodeCameraView != null) {
                     rBarcodeCameraView!!.close()
@@ -130,6 +138,7 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
 
             }
+
             "setBarcodeFormats" -> {
                 if (rBarcodeEngine != null) {
                     val formats = call.argument<List<String>>("formats") ?: arrayListOf()
@@ -139,6 +148,7 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     result.error("Error", "Camera View is null", null)
                 }
             }
+
             "stopScan" -> {
                 if (rBarcodeCameraView != null) {
                     rBarcodeCameraView!!.stopScan()
@@ -148,6 +158,7 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     result.error("Error", "Camera View is null", null)
                 }
             }
+
             "startScan" -> {
                 if (rBarcodeCameraView != null) {
                     rBarcodeCameraView!!.startScan()
@@ -157,19 +168,24 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     result.error("Error", "Camera View is null", null)
                 }
             }
+
             "setCropRect" -> {
                 if (rBarcodeCameraView != null) {
-                    rBarcodeEngine!!.setCropRect(call.argument<Int>("left")
+                    rBarcodeEngine!!.setCropRect(
+                        call.argument<Int>("left")
                             ?: 0, call.argument<Int>("top") ?: 0,
-                            call.argument<Int>("right") ?: 0, call.argument<Int>("bottom") ?: 0)
+                        call.argument<Int>("right") ?: 0, call.argument<Int>("bottom") ?: 0
+                    )
                     result.success(null)
                 } else {
                     result.error("Error", "Camera View is null", null)
                 }
             }
+
             "requestFocus" -> {
                 if (rBarcodeCameraView != null && rBarcodeEngine!!.isScanning()) {
-                    val windowManager: WindowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                    val windowManager: WindowManager =
+                        activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
                     val outMetrics = DisplayMetrics()
                     windowManager.defaultDisplay.getMetrics(outMetrics)
                     val windowWidth = outMetrics.widthPixels
@@ -179,11 +195,34 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     val width = call.argument<Double>("width") ?: 0.0
                     val height = call.argument<Double>("height") ?: 0.0
 
-                    val rect = MeteringRectangle(((x * windowWidth - width) / 2).toInt(), ((y * windowHeight - height) / 2).toInt(), width.toInt(), height.toInt(), 50)
+                    val rect = MeteringRectangle(
+                        ((x * windowWidth - width) / 2).toInt(),
+                        ((y * windowHeight - height) / 2).toInt(),
+                        width.toInt(),
+                        height.toInt(),
+                        50
+                    )
                     rBarcodeCameraView!!.requestFocus(rect)
                 }
                 result.success(null)
             }
+
+            "decodeImagePath" -> {
+                if (rBarcodeEngine != null) {
+                    val path = call.argument<String>("path") ?: ""
+                    val file = File(path)
+                    if (!file.isFile) {
+                        result.success(null)
+                    } else {
+                        rBarcodeEngine!!.decodeImagePath(file) {
+                            activity.runOnUiThread {
+                                result.success(mutableListOf(it))
+                            }
+                        }
+                    }
+                }
+            }
+
             else -> result.notImplemented()
         }
     }
@@ -200,7 +239,13 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val isDebug = call.argument<Boolean>("isDebug") ?: true
         val flutterSurfaceTexture: SurfaceTextureEntry = textureRegistry!!.createSurfaceTexture()
         rBarcodeEngine!!.initEventChannel(messenger!!, flutterSurfaceTexture.id(), isDebug)
-        rBarcodeCameraView = RBarcodeCameraView(activity, flutterSurfaceTexture, cameraName!!, resolutionPreset!!, rBarcodeEngine!!.imageListener)
+        rBarcodeCameraView = RBarcodeCameraView(
+            activity,
+            flutterSurfaceTexture,
+            cameraName!!,
+            resolutionPreset!!,
+            rBarcodeEngine!!.imageListener
+        )
         rBarcodeCameraView!!.open(result)
     }
 
@@ -220,8 +265,8 @@ public class RBarcodePlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         Log.d("rbarcode", "onAttachedToActivity")
         activity = binding.activity
         permissionsRegistry = object : RBarcodePermissions.PermissionsRegistry {
-            override fun addListener(handler: RequestPermissionsResultListener?) {
-                binding.addRequestPermissionsResultListener(handler!!)
+            override fun addListener(handler: RequestPermissionsResultListener) {
+                binding.addRequestPermissionsResultListener(handler)
             }
         }
     }

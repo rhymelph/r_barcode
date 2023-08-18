@@ -1,5 +1,7 @@
 package com.rhyme.r_barcode
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageFormat
 import android.graphics.Rect
 import android.media.Image
@@ -12,8 +14,11 @@ import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import com.rhyme.r_barcode.utils.ImageUtils
 import com.rhyme.r_barcode.utils.RBarcodeFormatUtils
+import com.rhyme.r_barcode.utils.RBarcodeNative
 import io.flutter.plugin.common.BinaryMessenger
+import java.io.File
 import java.lang.Exception
+import java.nio.ByteBuffer
 import java.util.*
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -38,6 +43,7 @@ class RBarcodeEngine {
     private var isReturnImage: Boolean = false
     private var threadHandler: HandlerThread = HandlerThread("RBarcodeThread")
     private val executor: Executor = Executors.newSingleThreadExecutor()
+    private val executorImage: Executor = Executors.newSingleThreadExecutor()
 
     /**
      * 初始化所有的编码格式
@@ -61,7 +67,8 @@ class RBarcodeEngine {
         ALL_FORMATS.add(BarcodeFormat.UPC_E)
         ALL_FORMATS.add(BarcodeFormat.UPC_EAN_EXTENSION)
 
-        val hints: MutableMap<DecodeHintType, Any?> = EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
+        val hints: MutableMap<DecodeHintType, Any?> =
+            EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
         hints[DecodeHintType.POSSIBLE_FORMATS] = getFormats()
         reader = MultiFormatReader()
         reader.setHints(hints)
@@ -133,7 +140,8 @@ class RBarcodeEngine {
         log("setFormats ${formats.joinToString(separator = "\n")}")
         this.mFormats!!.clear()
         this.mFormats.addAll(RBarcodeFormatUtils.transitionFromFlutterCode(formats))
-        val hints: MutableMap<DecodeHintType, Any?> = EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
+        val hints: MutableMap<DecodeHintType, Any?> =
+            EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
         hints[DecodeHintType.POSSIBLE_FORMATS] = getFormats()
         reader.setHints(hints)
     }
@@ -244,23 +252,68 @@ class RBarcodeEngine {
                     resultByte = ByteArray(entity.width * entity.height * 3 / 2)
                     System.arraycopy(entity.y, 0, sourceByte, 0, entity.yLen)
                     System.arraycopy(entity.u, 0, sourceByte, entity.yLen, entity.uLen)
-                    System.arraycopy(entity.v, 0, sourceByte, entity.yLen + entity.uLen, entity.vLen)
-                    ImageUtils.rotateYUVDegree90(sourceByte, resultByte, entity.width, entity.height)
+                    System.arraycopy(
+                        entity.v,
+                        0,
+                        sourceByte,
+                        entity.yLen + entity.uLen,
+                        entity.vLen
+                    )
+                    ImageUtils.rotateYUVDegree90(
+                        sourceByte,
+                        resultByte,
+                        entity.width,
+                        entity.height
+                    )
                 } else {
                     // 返回 未旋转的原图
                     resultByte = ByteArray(entity.yLen + entity.uLen + entity.vLen)
                     System.arraycopy(entity.y, 0, resultByte, 0, entity.yLen)
                     System.arraycopy(entity.u, 0, resultByte, entity.yLen, entity.uLen)
-                    System.arraycopy(entity.v, 0, resultByte, entity.yLen + entity.uLen, entity.vLen)
+                    System.arraycopy(
+                        entity.v,
+                        0,
+                        resultByte,
+                        entity.yLen + entity.uLen,
+                        entity.vLen
+                    )
                 }
 
-                val byte: ByteArray? = ImageUtils.nv212Flutter(resultByte, entity.width, entity.height, isRotate)
-                resultToMap(decodeResult, byte!!, entity.width, entity.height, isRotate)?.let { it1 ->
-                    if (!isScan) return@let
-                    eventChannel?.sendMessage(it1)
+                val byte: ByteArray? =
+                    ImageUtils.nv212Flutter(resultByte, entity.width, entity.height, isRotate)
+
+                if (isRotate) {
+                    resultToMap(
+                        decodeResult,
+                        byte!!,
+                        entity.height,
+                        entity.width,
+                        isRotate
+                    )?.let { it1 ->
+                        if (!isScan) return@let
+                        eventChannel?.sendMessage(it1)
+                    }
+                } else {
+                    resultToMap(
+                        decodeResult,
+                        byte!!,
+                        entity.width,
+                        entity.height,
+                        isRotate
+                    )?.let { it1 ->
+                        if (!isScan) return@let
+                        eventChannel?.sendMessage(it1)
+                    }
                 }
+
             } else {
-                resultToMapNoImage(decodeResult, entity.width, entity.height, isRotate)?.let { it1 ->
+                //返回不需要图片
+                resultToMapNoImage(
+                    decodeResult,
+                    entity.width,
+                    entity.height,
+                    isRotate
+                )?.let { it1 ->
                     if (!isScan) return@let
                     eventChannel?.sendMessage(it1)
                 }
@@ -268,6 +321,27 @@ class RBarcodeEngine {
         }
         log("thread:" + Thread.currentThread() + "  decodeImage time consuming:" + (System.currentTimeMillis() - firstTime) + "ms")
 
+    }
+
+    fun decodeImagePath(file: File, onResult: (result: Map<String, Any>?) -> Unit) {
+        executorImage.execute {
+            val bitmap = BitmapFactory.decodeFile(file.path)
+            val bytes = bitmap.byteCount
+            val buf = ByteBuffer.allocate(bytes)
+            bitmap.copyPixelsToBuffer(buf)
+            val width = bitmap.width
+            val height = bitmap.height
+            val yBuffer = ByteArray(width * height)
+            val uBuffer = ByteArray(width * height * 1 / 4)
+            val vBuffer = ByteArray(width * height * 1 / 4)
+            RBarcodeNative.get().aRGBToYUV(buf.array(), width, height, yBuffer, uBuffer, vBuffer)
+            val result = decodeImage(yBuffer, width, height)
+            if (result != null) {
+                onResult(resultToMapNoImage(result, width = width, height = height, false))
+            } else {
+                onResult(null)
+            }
+        }
     }
 
     /**
@@ -287,14 +361,16 @@ class RBarcodeEngine {
         }
 
         var result: Result? = null
-        val source = PlanarYUVLuminanceSource(byte,
-                width,
-                height,
-                cropRect?.left ?: 0,
-                cropRect?.top ?: 0,
-                dataWidth,
-                dataHeight,
-                false)
+        val source = PlanarYUVLuminanceSource(
+            byte,
+            width,
+            height,
+            cropRect?.left ?: 0,
+            cropRect?.top ?: 0,
+            dataWidth,
+            dataHeight,
+            false
+        )
         val bitmap = BinaryBitmap(HybridBinarizer(source))
         try {
             result = reader.decodeWithState(bitmap)
@@ -329,20 +405,31 @@ class RBarcodeEngine {
      * @param isRotate 是否旋转过
      * @return Flutter 所需要的内容
      */
-    private fun resultToMap(result: Result?, image: ByteArray, width: Int, height: Int, isRotate: Boolean): Map<String, Any>? {
+    private fun resultToMap(
+        result: Result?,
+        image: ByteArray,
+        width: Int,
+        height: Int,
+        isRotate: Boolean
+    ): Map<String, Any>? {
         if (result == null) return null
         val data: MutableMap<String, Any> = HashMap()
         data["text"] = result.text
         data["format"] = RBarcodeFormatUtils.transitionToFlutterCode(result.barcodeFormat)
         data["image"] = image
+        data["imageWidth"] = width;
+        data["imageHeight"] = height;
         if (result.resultPoints != null) {
+            //是否返回点位
             val resultPoints: MutableList<Map<String, Any>> = java.util.ArrayList()
             for (point in result.resultPoints) {
                 val pointMap: MutableMap<String, Any> = HashMap()
                 if (isRotate) {
-                    pointMap["x"] = (height - point.x) / height
-                    pointMap["y"] = (width - point.y) / width
+                    Log.d("rotate", "resultToMap: ${point.x} , $width , ${point.y}, $height")
+                    pointMap["x"] = point.x / width
+                    pointMap["y"] = point.y / height
                 } else {
+                    Log.d("not rotate", "resultToMap: ${point.x} , $width , ${point.y}, $height")
                     pointMap["y"] = point.x / width
                     pointMap["x"] = (height - point.y) / height
                 }
@@ -362,7 +449,12 @@ class RBarcodeEngine {
      * @param isRotate 是否旋转过
      * @return Flutter 所需要的内容
      */
-    private fun resultToMapNoImage(result: Result?, width: Int, height: Int, isRotate: Boolean): Map<String, Any>? {
+    private fun resultToMapNoImage(
+        result: Result?,
+        width: Int,
+        height: Int,
+        isRotate: Boolean
+    ): Map<String, Any>? {
         if (result == null) return null
         val data: MutableMap<String, Any> = HashMap()
         data["text"] = result.text

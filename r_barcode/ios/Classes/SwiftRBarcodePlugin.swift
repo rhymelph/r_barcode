@@ -96,6 +96,13 @@ public class SwiftRBarcodePlugin: NSObject, FlutterPlugin {
             }else{
                 result(FlutterError(code: "Error", message: "Camera View is null", details: nil))
             }
+        case "decodeImagePath":
+            if(rBarcodeEngine != nil){
+                let path = map!["path"] as! String
+                let data = FileManager.default.contents(atPath: path)
+                let decodeResult = rBarcodeEngine.decodeImage(data: data)
+                result(decodeResult)
+            }
         default:
             result(FlutterMethodNotImplemented)
         }

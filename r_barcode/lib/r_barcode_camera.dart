@@ -207,11 +207,11 @@ class RBarcodeCameraController extends ValueNotifier<RBarcodeCameraValue> {
     if (_isDisposed) return Future<void>.value();
     _creatingCompleter = Completer();
     try {
-      final Map<String, dynamic> reply = await (RBarcode._initialize(
+      final Map<String, dynamic>? reply = await (RBarcode._initialize(
           value.description!.name,
           _serializeResolutionPreset(value.resolutionPreset),
-          value.isDebug) as FutureOr<Map<String, dynamic>>);
-      _textureId = reply['textureId'];
+          value.isDebug));
+      _textureId = reply!['textureId'];
 
       await setBarcodeFormats(value.formats ?? RBarcode._globalFormat!);
 

@@ -36,6 +36,8 @@ class RBarcodeNative {
     external fun yUVToNv21(src: ByteArray, width: Int, height: Int, dst: ByteArray)
     //YUV转ARGB
     external fun yUVToARGB(src:ByteArray, width: Int,height: Int,dst: ByteArray)
-    
+    //ARGB砖YUV
+    external fun aRGBToYUV(src:ByteArray, width: Int,height: Int,dstY: ByteArray,dstU: ByteArray,dstV: ByteArray)
+
     external fun yUVFromImage(yb:ByteArray,ub:ByteArray,vb:ByteArray,yLength:Int,uLength:Int,vLength:Int):ByteArray
 }

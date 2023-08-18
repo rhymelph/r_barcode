@@ -278,15 +278,34 @@ Java_com_rhyme_r_1barcode_utils_RBarcodeNative_yUVToARGB(JNIEnv *env, jobject th
     env->ReleaseByteArrayElements(dst, dst_argb_data, 0);
 
 }extern "C"
+JNIEXPORT void JNICALL
+Java_com_rhyme_r_1barcode_utils_RBarcodeNative_aRGBToYUV(JNIEnv *env, jobject thiz, jbyteArray src,
+                                                         jint width, jint height, jbyteArray dstY,
+                                                         jbyteArray dstU, jbyteArray dstV) {
+    jbyte *src_argb_data = env->GetByteArrayElements(src, NULL);
+    jbyte *dst_y_data = env->GetByteArrayElements(dstY, NULL);
+    jbyte *dst_u_data = env->GetByteArrayElements(dstU, NULL);
+    jbyte *dst_v_data = env->GetByteArrayElements(dstV, NULL);
+    libyuv::ARGBToI420((const uint8_t *) src_argb_data, width * 4,
+                       (uint8_t *) dst_y_data, width,
+                       (uint8_t *) dst_u_data,(width + 1) / 2,
+                       (uint8_t *) dst_v_data, (width + 1) / 2, width,
+                       height);
+
+    env->ReleaseByteArrayElements(src, src_argb_data, 0);
+    env->ReleaseByteArrayElements(dstY, dst_y_data, 0);
+    env->ReleaseByteArrayElements(dstU, dst_u_data, 0);
+    env->ReleaseByteArrayElements(dstV, dst_v_data, 0);
+
+}extern "C"
 JNIEXPORT jbyteArray JNICALL
 Java_com_rhyme_r_1barcode_utils_RBarcodeNative_yUVFromImage(JNIEnv *env, jobject thiz,
                                                             jbyteArray yb, jbyteArray ub,
                                                             jbyteArray vb, jint y_length,
                                                             jint u_length, jint v_length) {
-    jbyte *yb_data = env->GetByteArrayElements(yb,NULL);
-    jbyte *ub_data = env->GetByteArrayElements(ub,NULL);
-    jbyte *vb_data = env->GetByteArrayElements(vb,NULL);
-
+    jbyte *yb_data = env->GetByteArrayElements(yb, NULL);
+    jbyte *ub_data = env->GetByteArrayElements(ub, NULL);
+    jbyte *vb_data = env->GetByteArrayElements(vb, NULL);
 
 
 }

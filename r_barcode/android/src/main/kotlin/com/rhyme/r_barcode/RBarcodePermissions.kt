@@ -9,7 +9,7 @@ import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener
 
 class RBarcodePermissions {
     interface PermissionsRegistry {
-        fun addListener(handler: RequestPermissionsResultListener?)
+        fun addListener(handler: RequestPermissionsResultListener)
     }
 
     interface ResultCallback {

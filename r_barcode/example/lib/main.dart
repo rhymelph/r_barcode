@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 import 'dart:math' as math;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:r_barcode/r_barcode.dart';
 
 void main() {
@@ -134,6 +136,19 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     setState(() {});
   }
 
+  void _handleDecodeImage() async {
+    // showCupertinoModalPopup(context: context, builder: builder);
+    final XFile files = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (files != null) {
+      final result = await RBarcode.decodeImagePath(files.path);
+      if(result==null){
+        print('Not found decode');
+      }else{
+        print(result);
+      }
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -144,6 +159,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 _buildCamera(),
                 _buildToolBar(),
                 _buildTorchButton(),
+                _buildResetButton(),
                 _buildImageButton(),
                 if (_result?.image != null) buildFrame(),
                 if (_result?.points != null) buildPoints(),
@@ -213,6 +229,21 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 //          ))
 //      .toList();
 
+  List<Widget> buildPointList() {
+    return _controller.result.points
+        .map((e) => Positioned(
+            left: e.x * MediaQuery.of(context).size.width,
+            top: e.y * MediaQuery.of(context).size.height,
+//        top: ((MediaQuery.of(context).size.height -
+//            MediaQuery.of(context).size.width /
+//                _controller.value.aspectRatio) /
+//            2) + ( MediaQuery.of(context).size.width /
+//            _controller.value.aspectRatio) * (min.x + (max.x - min.x) / 2),
+//        left: (min.x + (max.x - min.x) / 2) * MediaQuery.of(context).size.width,
+            child: RBarCodeCircleIndicator()))
+        .toList();
+  }
+
   Widget buildPoints() {
     RBarcodePoint min;
     RBarcodePoint max;
@@ -262,8 +293,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             child: GestureDetector(
                 onTapDown: (detail) {
                   _controller.requestFocus(
-                      detail.globalPosition.dx/MediaQuery.of(context).size.width,
-                      detail.globalPosition.dy /MediaQuery.of(context).size.height,
+                      detail.globalPosition.dx /
+                          MediaQuery.of(context).size.width,
+                      detail.globalPosition.dy /
+                          MediaQuery.of(context).size.height,
                       100,
                       100);
                 },
@@ -301,10 +334,18 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         ),
       );
 
-  Widget _buildImageButton() => Positioned(
+  Widget _buildResetButton() => Positioned(
       left: 32,
       bottom: 65,
       child: _buildCircleButton(Icons.refresh, false, _handleScanStart));
+
+  Widget _buildImageButton() => Positioned(
+      left: 32,
+      right: 32,
+      bottom: 65,
+      child: Center(
+          child: _buildCircleButton(
+              Icons.image_rounded, false, _handleDecodeImage)));
 
   Widget _buildTorchButton() => Positioned(
       right: 32,
